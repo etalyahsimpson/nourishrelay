@@ -116,7 +116,8 @@ def list_reservations(
         clauses.append("d.donor_org_id = %s")
         params.append(user.organization_id)
     elif user.role == "transport":
-        raise ApiError(403, "FORBIDDEN", "Transport users work from the pickups queue.")
+        # Transport schedules pickups: see ACCEPTED reservations only.
+        clauses.append("r.state = 'ACCEPTED'")
     elif user.role not in {"coordinator", "admin", "analyst"}:
         raise ApiError(403, "FORBIDDEN", "Role cannot list reservations.")
     if state:

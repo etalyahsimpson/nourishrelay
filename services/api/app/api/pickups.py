@@ -159,7 +159,12 @@ def _allowed_actions(user: CurrentUser, pickup: dict) -> list[str]:
             actions += ["collect", "fail"]
         elif status == "COLLECTED":
             actions += ["deliver", "fail"]
-    if user.role == "recipient" and user.organization_id == pickup["recipient_org_id"]:
-        if status == "DELIVERED":
-            actions.append("receipt")
+    if (
+        user.role == "recipient"
+        and user.organization_id == pickup["recipient_org_id"]
+        and status == "DELIVERED"
+        and not pickup.get("receipt")
+    ):
+        # one recipient confirmation per pickup (unique receipt)
+        actions.append("receipt")
     return actions

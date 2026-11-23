@@ -5,7 +5,7 @@ FROM python:3.12-slim-bookworm
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/srv/services/api:/srv/workers
+    PYTHONPATH=/srv/services/api:/srv
 
 WORKDIR /srv/services/api
 

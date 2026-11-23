@@ -19,10 +19,13 @@ import sys
 from pathlib import Path
 
 # Allow direct invocation (python workers/tasks.py / pytest import) without
-# the container PYTHONPATH: ensure services/api is importable.
-_API_ROOT = Path(__file__).resolve().parents[1] / "services" / "api"
-if str(_API_ROOT) not in sys.path:
-    sys.path.insert(0, str(_API_ROOT))
+# the container PYTHONPATH: make both `app` and the `workers` package itself
+# importable (the repository root is the package parent).
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_API_ROOT = _REPO_ROOT / "services" / "api"
+for entry in (str(_API_ROOT), str(_REPO_ROOT)):
+    if entry not in sys.path:
+        sys.path.insert(0, entry)
 
 from app import db  # noqa: E402
 from app.domain.clock import utcnow  # noqa: E402

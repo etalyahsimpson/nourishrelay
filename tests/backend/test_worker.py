@@ -15,7 +15,7 @@ from helpers import create_published_donation, donation_payload, org_id_by_name
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT / "services" / "api"))
-sys.path.insert(0, str(REPO_ROOT / "workers"))
+sys.path.insert(0, str(REPO_ROOT))  # `workers` package parent
 
 from workers import tasks as worker_tasks  # noqa: E402
 
