@@ -339,8 +339,8 @@ def list_donations(
     status = status or donation_status
     if status is not None and status.upper() not in _DONATION_STATUSES:
         raise ApiError(422, "INVALID_FILTER", f"status must be one of {sorted(_DONATION_STATUSES)}")
-    clauses: list[str] = ["d.status <> 'DRAFT' OR d.donor_org_id = %s"]
-    params: list = [user.organization_id or "00000000-0000-4000-8000-000000000000"]
+    clauses: list[str] = []
+    params: list = []
     if user.role == "donor":
         clauses = ["d.donor_org_id = %s"]
         params = [user.organization_id]
@@ -348,7 +348,9 @@ def list_donations(
         clauses = ["d.status IN ('AVAILABLE','PARTIALLY_RESERVED','FULLY_RESERVED')"]
     elif user.role == "transport":
         raise ApiError(403, "FORBIDDEN", "Transport users work from the pickups queue.")
-    # coordinator/admin/analyst see all published + their drafts if any (none: orgs are platform)
+    else:
+        # coordinator/admin/analyst see all published donations
+        clauses = ["d.status <> 'DRAFT'"]
     if category:
         clauses.append("d.category = %s")
         params.append(category.strip().lower())

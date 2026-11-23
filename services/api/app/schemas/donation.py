@@ -107,7 +107,7 @@ class DonationUpdate(StrictBaseModel):
 class PublishRequest(StrictBaseModel):
     """Human attestation that the donor completed donor-side handling review."""
 
-    attested: bool = False
+    attested: bool  # required: publication without explicit attestation is rejected
 
     @field_validator("attested")
     @classmethod

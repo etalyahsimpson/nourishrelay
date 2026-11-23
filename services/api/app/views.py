@@ -96,7 +96,8 @@ _RESERVATION_KEYS = [
 
 def reservation_row(row) -> dict:
     d = norm_uuids(dict(zip(_RESERVATION_KEYS, row)))
-    d.pop("donor_org_id2")
+    donor_org_id = d.pop("donor_org_id2")
+    d["donor_org_id"] = donor_org_id
     d.pop("committed_kg")
     d.pop("donation_quantity_kg")
     d["quantity_kg"] = _dec_str(d["quantity_kg"])
@@ -141,7 +142,8 @@ _PICKUP_KEYS = [
 
 def pickup_row(row, receipt_row=None) -> dict:
     d = norm_uuids(dict(zip(_PICKUP_KEYS, row)))
-    d["quantity_kg"] = _dec_str(d.pop("quantity_kg"))
+    d["reserved_quantity_kg"] = _dec_str(d.pop("quantity_kg"))
+    d["assigned_transport_org_name"] = d.pop("transport_org_name")
     d.pop("donor_org_id")
     d["collected_quantity_kg"] = _dec_str(d["collected_quantity_kg"]) if d["collected_quantity_kg"] is not None else None
     d["receipt"] = receipt_summary(receipt_row) if receipt_row else None

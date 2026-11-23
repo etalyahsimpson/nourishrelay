@@ -92,19 +92,24 @@ class StrictBaseModel(ApiModel):
 
 def ensure_finite_decimal(value: Any) -> Decimal:
     """Coerce to Decimal and guarantee finiteness (no NaN/Inf)."""
-    if isinstance(value, float):
-        if not math.isfinite(value):
-            raise ValueError("non-finite quantity")
-        return Decimal(str(value))
-    if isinstance(value, Decimal):
-        if not value.is_finite():
-            raise ValueError("non-finite quantity")
-        return value
-    if isinstance(value, str):
-        d = Decimal(value.strip())
-        if not d.is_finite():
-            raise ValueError("non-finite quantity")
-        return d
-    if isinstance(value, int):
-        return Decimal(value)
+    from decimal import InvalidOperation
+
+    try:
+        if isinstance(value, float):
+            if not math.isfinite(value):
+                raise ValueError("non-finite quantity")
+            return Decimal(str(value))
+        if isinstance(value, Decimal):
+            if not value.is_finite():
+                raise ValueError("non-finite quantity")
+            return value
+        if isinstance(value, str):
+            d = Decimal(value.strip())
+            if not d.is_finite():
+                raise ValueError("non-finite quantity")
+            return d
+        if isinstance(value, int):
+            return Decimal(value)
+    except InvalidOperation as exc:
+        raise ValueError("quantity must be a number") from exc
     raise ValueError("quantity must be a number")
