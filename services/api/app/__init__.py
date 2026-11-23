@@ -1,0 +1,3 @@
+"""NourishRelay API — portfolio demonstration (synthetic data only)."""
+
+__version__ = "0.1.0"
