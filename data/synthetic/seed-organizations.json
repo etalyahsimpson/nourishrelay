@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "synthetic": true,
+    "label": "NourishRelay synthetic demonstration dataset",
+    "warning": "Portfolio demonstration. Synthetic organizations, users, donations, pickups and receipts. Not for real food-safety or dispatch decisions.",
+    "demo_password": "demo-password",
+    "usage": "Consumed by services/api/scripts/seed.py. All time windows are generated relative to the moment the seed script runs so the demonstration never goes stale. Seeding is idempotent: records are keyed by fixed synthetic identifiers and re-running does not duplicate the scenario.",
+    "provenance": "Generated for this project; no real organizations, people, addresses, or phone numbers are represented."
+  },
+  "organizations": [
+    { "slug": "metro-grocery-exchange", "name": "Metro Grocery Exchange", "kind": "donor", "verified": true, "service_area": "District A" },
+    { "slug": "harvest-lane-market", "name": "Harvest Lane Market", "kind": "donor", "verified": true, "service_area": "District B" },
+    { "slug": "northside-community-kitchen", "name": "Northside Community Kitchen", "kind": "recipient", "verified": true, "service_area": "District A" },
+    { "slug": "riverside-shelter", "name": "Riverside Shelter", "kind": "recipient", "verified": true, "service_area": "District B" },
+    { "slug": "eastview-pantry", "name": "Eastview Pantry", "kind": "recipient", "verified": true, "service_area": "District C" },
+    { "slug": "hillside-community-center", "name": "Hillside Community Center", "kind": "recipient", "verified": true, "service_area": "District A" },
+    { "slug": "swift-collective-transport", "name": "Swift Collective Volunteer Transport", "kind": "transport", "verified": true, "service_area": "Districts A+B" },
+    { "slug": "nourish-relay-platform", "name": "NourishRelay Relay Network", "kind": "platform", "verified": true, "service_area": "Demo region" }
+  ],
+  "users": [
+    { "email": "donor@metro.demo.nourishrelay.example", "display_name": "Dana Donor (Metro Grocery Exchange)", "role": "donor", "org": "metro-grocery-exchange" },
+    { "email": "donor@harvestlane.demo.nourishrelay.example", "display_name": "Harriet Donor (Harvest Lane Market)", "role": "donor", "org": "harvest-lane-market" },
+    { "email": "recipient@northside.demo.nourishrelay.example", "display_name": "Nadia Recipient (Northside Community Kitchen)", "role": "recipient", "org": "northside-community-kitchen" },
+    { "email": "recipient@riverside.demo.nourishrelay.example", "display_name": "Rio Recipient (Riverside Shelter)", "role": "recipient", "org": "riverside-shelter" },
+    { "email": "recipient@eastview.demo.nourishrelay.example", "display_name": "Eve Recipient (Eastview Pantry)", "role": "recipient", "org": "eastview-pantry" },
+    { "email": "transport@swiftcollective.demo.nourishrelay.example", "display_name": "Sam Courier (Swift Collective Volunteer Transport)", "role": "transport", "org": "swift-collective-transport" },
+    { "email": "coordinator@relay.demo.nourishrelay.example", "display_name": "Casey Coordinator (Relay Network)", "role": "coordinator", "org": "nourish-relay-platform" },
+    { "email": "analyst@relay.demo.nourishrelay.example", "display_name": "Alex Analyst (Relay Network)", "role": "analyst", "org": "nourish-relay-platform" },
+    { "email": "admin@relay.demo.nourishrelay.example", "display_name": "Avery Admin (Relay Network)", "role": "admin", "org": "nourish-relay-platform" }
+  ],
+  "recipient_profiles": [
+    {
+      "org": "northside-community-kitchen",
+      "accepted_categories": ["produce", "baked", "dairy", "canned", "prepared"],
+      "max_kg_per_day": "80.000",
+      "handling_acknowledged": ["ambient", "requires_cold", "contains_allergens"],
+      "receiving_start": "06:00",
+      "receiving_end": "20:00",
+      "timezone": "UTC",
+      "active": true
+    },
+    {
+      "org": "riverside-shelter",
+      "accepted_categories": ["produce", "prepared", "canned"],
+      "max_kg_per_day": "60.000",
+      "handling_acknowledged": ["ambient", "requires_cold"],
+      "receiving_start": "08:00",
+      "receiving_end": "18:00",
+      "timezone": "UTC",
+      "active": true
+    },
+    {
+      "org": "eastview-pantry",
+      "accepted_categories": ["produce", "dairy"],
+      "max_kg_per_day": "40.000",
+      "handling_acknowledged": ["ambient"],
+      "receiving_start": "09:00",
+      "receiving_end": "17:00",
+      "timezone": "UTC",
+      "active": true
+    },
+    {
+      "org": "hillside-community-center",
+      "accepted_categories": ["baked", "canned"],
+      "max_kg_per_day": "30.000",
+      "handling_acknowledged": ["ambient"],
+      "receiving_start": "07:00",
+      "receiving_end": "19:00",
+      "timezone": "UTC",
+      "active": true
+    }
+  ],
+  "categories": ["produce", "baked", "dairy", "canned", "prepared"],
+  "handling_tags": ["ambient", "requires_cold", "contains_allergens"],
+  "active_donations": [
+    {
+      "key": "hero-produce-120",
+      "donor_org": "metro-grocery-exchange",
+      "created_by": "donor@metro.demo.nourishrelay.example",
+      "category": "produce",
+      "quantity_kg": "120.000",
+      "handling_tags": ["ambient"],
+      "pickup_start_offset_hours": 24,
+      "pickup_end_offset_hours": 28,
+      "deadline_offset_hours": 27,
+      "location_label": "Demo District A — Metro Grocery Exchange loading dock",
+      "notes": "Assorted fresh produce, packed in crates. Verified by donor before publishing.",
+      "publish": true
+    },
+    {
+      "key": "dairy-cold-60",
+      "donor_org": "metro-grocery-exchange",
+      "created_by": "donor@metro.demo.nourishrelay.example",
+      "category": "dairy",
+      "quantity_kg": "60.000",
+      "handling_tags": ["requires_cold", "contains_allergens"],
+      "pickup_start_offset_hours": 24,
+      "pickup_end_offset_hours": 27,
+      "deadline_offset_hours": 26,
+      "location_label": "Demo District A — Metro Grocery Exchange cold room",
+      "notes": "Chilled dairy; requires acknowledged cold-chain handling by receiver.",
+      "publish": true
+    },
+    {
+      "key": "baked-25",
+      "donor_org": "harvest-lane-market",
+      "created_by": "donor@harvestlane.demo.nourishrelay.example",
+      "category": "baked",
+      "quantity_kg": "25.000",
+      "handling_tags": ["ambient"],
+      "pickup_start_offset_hours": 26,
+      "pickup_end_offset_hours": 29,
+      "deadline_offset_hours": 28,
+      "location_label": "Demo District B — Harvest Lane Market side entrance",
+      "notes": "Day-old bread and pastry, boxed.",
+      "publish": true
+    },
+    {
+      "key": "canned-mixed-50",
+      "donor_org": "metro-grocery-exchange",
+      "created_by": "donor@metro.demo.nourishrelay.example",
+      "category": "canned",
+      "quantity_kg": "50.000",
+      "handling_tags": ["ambient"],
+      "pickup_start_offset_hours": 25,
+      "pickup_end_offset_hours": 30,
+      "deadline_offset_hours": 29,
+      "location_label": "Demo District A — Metro Grocery Exchange dry storage",
+      "notes": "Assorted shelf-stable canned goods.",
+      "publish": true
+    },
+    {
+      "key": "prepared-45-draft",
+      "donor_org": "harvest-lane-market",
+      "created_by": "donor@harvestlane.demo.nourishrelay.example",
+      "category": "prepared",
+      "quantity_kg": "45.000",
+      "handling_tags": ["requires_cold", "ambient"],
+      "pickup_start_offset_hours": 48,
+      "pickup_end_offset_hours": 51,
+      "deadline_offset_hours": 50,
+      "location_label": "Demo District B — Harvest Lane Market kitchen",
+      "notes": "Surplus prepared meals. Draft: donor still completing handling review.",
+      "publish": false
+    }
+  ],
+  "pending_proposals": [
+    {
+      "donation_key": "hero-produce-120",
+      "recipient_org": "northside-community-kitchen",
+      "proposed_by": "coordinator@relay.demo.nourishrelay.example",
+      "quantity_kg": "80.000",
+      "proposal_expires_offset_hours": 12
+    }
+  ],
+  "history_flows": [
+    {
+      "key": "history-produce-northside-riverside",
+      "days_ago": 3,
+      "donor_org": "harvest-lane-market",
+      "category": "produce",
+      "quantity_kg": "70.000",
+      "handling_tags": ["ambient"],
+      "location_label": "Demo District B — Harvest Lane Market",
+      "steps": [
+        { "type": "proposal", "recipient_org": "northside-community-kitchen", "quantity_kg": "40.000", "hours_after_start": 0.5, "outcome": "accepted" },
+        { "type": "pickup", "recipient_org": "northside-community-kitchen", "assigned_transport": "swift-collective-transport", "hours_after_start": 2, "collected_kg": "40.000", "delivered_hours_after": 3, "receipt_kg": "40.000" },
+        { "type": "proposal", "recipient_org": "riverside-shelter", "quantity_kg": "30.000", "hours_after_start": 1, "outcome": "accepted" },
+        { "type": "pickup", "recipient_org": "riverside-shelter", "assigned_transport": "swift-collective-transport", "hours_after_start": 2.5, "collected_kg": "30.000", "delivered_hours_after": 3, "receipt_kg": "25.000", "receipt_exception": "Packaging damaged in transit; 5 kg declined at handover" },
+        { "type": "close", "mode": "expired" }
+      ]
+    },
+    {
+      "key": "history-dairy-failed-before-collection",
+      "days_ago": 4,
+      "donor_org": "metro-grocery-exchange",
+      "category": "dairy",
+      "quantity_kg": "40.000",
+      "handling_tags": ["requires_cold"],
+      "location_label": "Demo District A — Metro Grocery Exchange cold room",
+      "steps": [
+        { "type": "proposal", "recipient_org": "northside-community-kitchen", "quantity_kg": "40.000", "hours_after_start": 0.4, "outcome": "accepted" },
+        { "type": "pickup", "recipient_org": "northside-community-kitchen", "assigned_transport": "swift-collective-transport", "hours_after_start": 1.5, "failed": true, "failure_stage": "BEFORE_COLLECTION", "failure_reason": "Volunteer vehicle breakdown before arrival" },
+        { "type": "close", "mode": "expired" }
+      ]
+    },
+    {
+      "key": "history-prepared-failed-after-collection",
+      "days_ago": 2,
+      "donor_org": "harvest-lane-market",
+      "category": "prepared",
+      "quantity_kg": "25.000",
+      "handling_tags": ["requires_cold"],
+      "location_label": "Demo District B — Harvest Lane Market kitchen",
+      "steps": [
+        { "type": "proposal", "recipient_org": "riverside-shelter", "quantity_kg": "25.000", "hours_after_start": 0.5, "outcome": "accepted" },
+        { "type": "pickup", "recipient_org": "riverside-shelter", "assigned_transport": "swift-collective-transport", "hours_after_start": 1.5, "collected_kg": "25.000", "failed_after_collection": true, "failure_reason": "Cold-chain breach reported by driver before delivery" },
+        { "type": "close", "mode": "expired" }
+      ]
+    },
+    {
+      "key": "history-baked-hillside",
+      "days_ago": 5,
+      "donor_org": "harvest-lane-market",
+      "category": "baked",
+      "quantity_kg": "30.000",
+      "handling_tags": ["ambient"],
+      "location_label": "Demo District B — Harvest Lane Market",
+      "steps": [
+        { "type": "proposal", "recipient_org": "hillside-community-center", "quantity_kg": "30.000", "hours_after_start": 0.5, "outcome": "accepted" },
+        { "type": "pickup", "recipient_org": "hillside-community-center", "assigned_transport": "swift-collective-transport", "hours_after_start": 1.5, "collected_kg": "30.000", "delivered_hours_after": 2.5, "receipt_kg": "30.000" },
+        { "type": "close", "mode": "closed" }
+      ]
+    },
+    {
+      "key": "history-produce-declined-then-expired",
+      "days_ago": 7,
+      "donor_org": "metro-grocery-exchange",
+      "category": "produce",
+      "quantity_kg": "55.000",
+      "handling_tags": ["ambient"],
+      "location_label": "Demo District A — Metro Grocery Exchange",
+      "steps": [
+        { "type": "proposal", "recipient_org": "hillside-community-center", "quantity_kg": "30.000", "hours_after_start": 0.5, "outcome": "declined", "decline_reason": "No dry storage space for today" },
+        { "type": "close", "mode": "expired" }
+      ]
+    },
+    {
+      "key": "history-produce-cancelled",
+      "days_ago": 2,
+      "donor_org": "metro-grocery-exchange",
+      "category": "produce",
+      "quantity_kg": "35.000",
+      "handling_tags": ["ambient"],
+      "location_label": "Demo District A — Metro Grocery Exchange",
+      "steps": [
+        { "type": "proposal", "recipient_org": "riverside-shelter", "quantity_kg": "35.000", "hours_after_start": 0.5, "outcome": "accepted" },
+        { "type": "cancellation", "hours_after_start": 1, "reason": "Donor withdrew offer after quality check; coordinator cancelled the uncollected reservation" },
+        { "type": "close", "mode": "withdrawn" }
+      ]
+    },
+    {
+      "key": "history-produce-northside-60",
+      "days_ago": 8,
+      "donor_org": "metro-grocery-exchange",
+      "category": "produce",
+      "quantity_kg": "100.000",
+      "handling_tags": ["ambient"],
+      "location_label": "Demo District A — Metro Grocery Exchange",
+      "steps": [
+        { "type": "proposal", "recipient_org": "northside-community-kitchen", "quantity_kg": "60.000", "hours_after_start": 0.5, "outcome": "accepted" },
+        { "type": "pickup", "recipient_org": "northside-community-kitchen", "assigned_transport": "swift-collective-transport", "hours_after_start": 2, "collected_kg": "60.000", "delivered_hours_after": 3, "receipt_kg": "60.000" },
+        { "type": "close", "mode": "expired" }
+      ]
+    },
+    {
+      "key": "history-baked-hillside-20",
+      "days_ago": 1,
+      "donor_org": "metro-grocery-exchange",
+      "category": "baked",
+      "quantity_kg": "20.000",
+      "handling_tags": ["ambient"],
+      "location_label": "Demo District A — Metro Grocery Exchange",
+      "steps": [
+        { "type": "proposal", "recipient_org": "hillside-community-center", "quantity_kg": "20.000", "hours_after_start": 0.5, "outcome": "accepted" },
+        { "type": "pickup", "recipient_org": "hillside-community-center", "assigned_transport": "swift-collective-transport", "hours_after_start": 1.5, "collected_kg": "20.000", "delivered_hours_after": 2.5, "receipt_kg": "20.000" },
+        { "type": "close", "mode": "closed" }
+      ]
+    }
+  ]
+}

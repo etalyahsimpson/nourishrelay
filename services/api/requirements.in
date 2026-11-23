@@ -1,0 +1,18 @@
+# NourishRelay API runtime dependencies — abstract requirements.
+# Exact, tested versions are pinned in requirements.lock.txt (generated from a
+# clean virtualenv; see docs/DECISIONS.md). Nothing may be added here without
+# matching the approved technology list in the project specification.
+#
+# Runtime
+fastapi                # HTTP API framework (approved primary framework)
+uvicorn[standard]      # ASGI server adapter required to serve FastAPI
+psycopg[binary]        # PostgreSQL driver adapter (approved DB is PostgreSQL 16)
+psycopg-pool           # connection pooling for psycopg
+celery[redis]          # background job framework (approved worker stack)
+redis                  # Redis client adapter (broker transport for Celery)
+pyjwt                  # JWT sign/verify adapter for demo session cookies
+bcrypt                 # password hashing adapter for synthetic demo accounts
+email-validator         # Pydantic EmailStr support for synthetic demo emails
+# Test harness (pinned in lock as well; used by CI)
+pytest
+httpx                   # FastAPI TestClient transport

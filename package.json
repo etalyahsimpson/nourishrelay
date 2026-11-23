@@ -1,0 +1,14 @@
+{
+  "name": "nourishrelay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Root orchestration package for cross-service Playwright E2E tests only. apps/web and services/api build independently (see docker-compose.yml).",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:chromium": "playwright test --project=chromium",
+    "test:e2e:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0"
+  }
+}

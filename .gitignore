@@ -1,0 +1,48 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# --- Node / Next.js ---
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# --- Environment & secrets (never commit real values) ---
+.env
+.env.*
+!.env.example
+
+# --- Test / CI artifacts ---
+coverage/
+playwright-report/
+test-results/
+junit*.xml
+*.log
+logs/
+
+# --- ML artifacts (code is tracked, generated data/models are not) ---
+mlruns/
+ml/artifacts/
+ml/outputs/
+
+# --- Local databases / backups ---
+*.sqlite3
+*.dump
+*.sql.gz
+backups/
+db/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
